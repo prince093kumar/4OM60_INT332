@@ -6,15 +6,17 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         name = request.form.get("name")
-        return f"Hello {name}! (from Docker)"
+        address = request.form.get("address")
+        return f"Hello {name}, your address is {address}"
 
-    return """
-    <h2>Simple Flask Form</h2>
-    <form method="post">
-        <input type="text" name="name" placeholder="Enter name" required>
-        <button type="submit">Submit</button>
-    </form>
-    """
+    return '''
+        <h2>Enter Details</h2>
+        <form method="post">
+            Name: <input type="text" name="name"><br><br>
+            Address: <input type="text" name="address"><br><br>
+            <input type="submit">
+        </form>
+    '''
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
