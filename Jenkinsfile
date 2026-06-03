@@ -14,14 +14,14 @@ pipeline{
         }
         stage('compile'){
             steps{
-                dir('4OM60_INT332/student-app'){
+                dir('student-app'){
                     bat 'mvn compile'
                 }
             }
         }
         stage('test'){
             steps{
-                dir('4OM60_INT332/student-app'){
+                dir('student-app'){
                     bat 'mvn test'
                 }
                 
@@ -29,7 +29,7 @@ pipeline{
         }
         stage('Build'){
             steps{
-                dir('4OM60_INT332/student-app'){
+                dir('student-app'){
                     bat 'mvn clean package'
                 }
                 
