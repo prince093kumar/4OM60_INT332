@@ -1,0 +1,38 @@
+services:
+  
+  db:
+   image: mysql:8.0
+
+   ports:
+    - "3306:3306"
+   
+   environment:
+    MYSQL_DATABASE: wordpress
+    MYSQL_USER: wpuser
+    MYSQL_PASSWORD: 12345
+    MYSQL_ROOT_PASSWORD: r12345
+
+   volumes:
+    - mydb:/var/lib/mysql
+
+  
+  
+  
+  
+  wordpress:
+   image: wordpress
+
+   ports:
+    - "8081:80"
+
+   environment:
+    WORDPRESS_DB_USER: wpuser
+    WORDPRESS_DB_NAME: wordpress
+    WORDPRESS_DB_HOST: db
+    WORDPRESS_DB_PASSWORD: 12345
+
+   depends_on:
+    - db
+
+volumes:
+  mydb:

@@ -1,0 +1,34 @@
+name: aws deployment
+
+on:
+  push:
+    branches:
+      - main
+      - devops
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+
+        with:
+          host: ${{secrets.EC2_HOST}}
+          key: ${{secrets.EC2_KEY}}
+          username: ${{secrets.EC2_USER}}
+
+          script: |
+            if [ ! -d  ~/4OM60_INT332 ]; then
+            git clone https://github.com/prince093kumar/4OM60_INT332.git
+            fi
+
+            cd ~/4OM60_INT332/demo
+            git pull
+
+            docker build -t nodeapp:v1 .
+            docker stop nodeapp || true
+            docker rm nodeapp || true
+
+            docker run -d -p 3000:3000  nodeapp:v1
