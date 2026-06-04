@@ -2,7 +2,7 @@ package com.example;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("Maven directory structure is correct.");
+        System.out.println("Jenkins pipelines.");
     }
 
     public static String greet(String name) {
